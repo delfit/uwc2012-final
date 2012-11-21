@@ -1,0 +1,28 @@
+body
+{
+	background: #EFEFEF;
+	color: #555;
+	font: normal 10pt Arial,Helvetica,sans-serif;
+	margin: 0;
+	padding: 45px 0 0 0;
+}
+
+#footer
+{
+	
+	border-top: 1px solid #C9E0ED;
+	font-size: 0.8em;
+	margin: 10px 20px;
+	padding: 10px;
+	text-align: center;
+}
+
+
+
+
+/* Overriding Bootstrap styles */
+body .navbar .brand, 
+body .navbar .nav > li > a 
+{
+	color: #444444;
+}

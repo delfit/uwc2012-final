@@ -1,0 +1,1 @@
+Финал конкурса UA Web Challenge 2012
