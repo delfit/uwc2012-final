@@ -13,6 +13,70 @@ class SiteController extends Controller
 			'index'
 		);
 	}
+        
+        public function actionView() {
+            $form = new ProductForm();
+            if(isset($_GET['ProductForm'])){
+                $form->attributes = $_GET['ProductForm'];
+                if( $form->validate() ) {
+                    
+                }
+                else {
+                    print_r( $form->getErrors() );
+                }
+            }
+            $this->render(
+                        'view',
+                        array(
+                            'products'=>array(
+                                array(
+                                    'id' => '1',
+                                    'name' => 'base'
+                                ),
+                                array(
+                                    'id' => '2',
+                                    'name' => 'form'
+                                )
+                            ),
+                            'model' => $form
+                        )
+                );
+        }
+        
+        public function actionResponse() {
+            $this->render(
+                    'response',
+                    array(
+                        'model' => new ResponseForm()
+                    )
+            );
+        }
+		
+		public function actionProfile() {
+			$form = new ProfileForm();
+			
+			$form->id = 1; 
+			$form->firstName = 'John'; 
+			$form->lastName = 'White'; 
+			$form->pictureUrl = 'http://placehold.it/200x250';
+			$form->publicProfileUrl = '';
+			$form->headline = 'Headline'; 
+			$form->currentStatus = 'Status'; 
+			$form->location = 'USA';
+			$form->distance = ''; 
+			$form->summary = '';
+			$form->industry = ''; 
+			$form->specialties = '';
+			$form->positions = '';
+			$form->educations = '';
+			
+			$this->render(
+					'profile',
+				array(
+					'model'=>$form
+				)
+			);
+		}
 
 
 	/**
