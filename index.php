@@ -13,3 +13,4 @@ Yii::createWebApplication( $config )->run();
 
 echo "New branch";
 echo "World is beautiful";
+echo "World is amazing";
