@@ -12,3 +12,4 @@ require_once($yii);
 Yii::createWebApplication( $config )->run();
 
 echo "New branch";
+echo "World is beautiful";
