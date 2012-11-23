@@ -50,4 +50,9 @@ class ProfileController extends Controller
 			)
 		);
 	}
+	
+	
+	public function actionUpdate() {
+		
+	}
 }
