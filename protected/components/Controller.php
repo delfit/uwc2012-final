@@ -19,11 +19,9 @@ class Controller extends CController
 	 * @var array main menu items
 	 */
 	public $mainMenu = array(
-		array( 'label' => 'Home', 'url' => '#' ),
-		array( 'label' => 'Profile', 'url' => 'profile/profile' ),
-		array( 'label' => 'Settings', 'url' => 'profile/setting' ),
+		
 	);
-	
+		
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
 	 */
@@ -35,5 +33,21 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs = array( );
+	
+	
+	public function beforeRender( $view ) {
+		parent::beforeRender( $view );
+
+		// создать главное меню сайта из категорий
+		$this->mainMenu = array(
+			array( 'label' => 'Home', 'url' => '#', 'active' => true ),
+			array( 
+				'label' => 'Profile', 'url' => $this->createUrl( 'profile/view', $this->getActionParams() )
+			),
+			array( 'label' => 'Settings', 'url' => $this->createUrl( 'profile/setting', $this->getActionParams() ) )
+		);
+
+		return true;
+	}
 
 }

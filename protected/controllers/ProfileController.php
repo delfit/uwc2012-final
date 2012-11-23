@@ -2,7 +2,7 @@
 
 class ProfileController extends Controller
 {
-	public function actionIndex() {		
+	public function actionView() {		
 		Yii::import( 'application.extensions.linkedin.*' );
 		$linkedin = new linkedin();
 		$linkedin->init();
@@ -41,7 +41,7 @@ class ProfileController extends Controller
 		foreach( $activeAttributes as $activeAttribute ) {
 			$model->{$activeAttribute} = true;
 		}
-		
+
 		$this->render( 
 			'setting',
 			array(
