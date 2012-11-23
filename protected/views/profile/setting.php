@@ -1,4 +1,9 @@
 <?php
+	echo CHtml::openTag('h2', array(
+		'style'=>'text-align: center;'
+	));
+		echo Yii::t('application', 'Settings');
+	echo CHtml::closeTag('h2');
 	echo CHtml::openTag('div', array(
 		'class'=>'row-fluid'
 	));

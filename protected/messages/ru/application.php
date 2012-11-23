@@ -13,5 +13,7 @@ return array(
 	'distance' => 'Расстояние',
 	'summary' => 'Сводка',
 	'industry' => 'Индустрия',
+	'Generate CV' => 'Создать резюме',
+	'Settings' => 'Настройки'
 );
 ?>

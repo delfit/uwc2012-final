@@ -11,7 +11,7 @@ $baseURL = Yii::app()->request->baseUrl;
 		$this->widget( 'bootstrap.widgets.TbButton', array(
 			'type' => 'primary',
 			'size' => 'large',
-			'label' => 'Generate CV',
+			'label' => Yii::t('application', 'Generate CV'),
 			'url' => $baseURL.'/profile/view',
 			'htmlOptions' => array(
 				'style'=>'margin: 0 auto; display: block;'
