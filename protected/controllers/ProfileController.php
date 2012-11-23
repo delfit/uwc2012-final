@@ -36,12 +36,16 @@ class ProfileController extends Controller
 		
 			Yii::app()->linkedin->setActiveAttributes( $attributes );
 		}
-
+		
+		$activeAttributes = Yii::app()->linkedin->getActiveAttributes();
+		foreach( $activeAttributes as $activeAttribute ) {
+			$model->{$activeAttribute} = true;
+		}
+		
 		$this->render( 
 			'setting',
 			array(
 				'attributes' => Yii::app()->linkedin->getProfileAviableAttributes(),
-				'checkedAttributes' => Yii::app()->linkedin->getActiveAttributes(),
 				'model' => $model,
 			)
 		);
