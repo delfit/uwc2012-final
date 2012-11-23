@@ -2,13 +2,13 @@
 	echo CHtml::openTag('div', array(
 		'class'=>'row-fluid'
 	));
-		echo CHtml::image($model['pictureURL'], 'photo', array(
-			'class'=>'pull-left',
-			'style'=>'margin-top: 10px;',
-		));
 		echo CHtml::openTag('div', array(
-			'class'=>'span8'
+			'class'=>'span8 offset2'
 		));
+			echo CHtml::image($model['pictureURL'], 'photo', array(
+				'class'=>'pull-left',
+				'style'=>'margin-top: 10px;',
+			));
 			echo CHtml::openTag('h1');
 				if( $model['firstName'] ) {
 					$this->widget('bootstrap.widgets.TbEditableField', array(
@@ -44,9 +44,6 @@
 					'url'       => $this->createUrl('#'),  //url for submit data
 					'enabled'   => true,
 					'placement'    => 'bottom',
-					'htmlOptions' => array(
-						'class' => 'pull-left'
-					)
 				 ));
 			}
 			$fields = array();
@@ -63,19 +60,18 @@
 				}
 
 			}
-			
-			echo CHtml::openTag('div', array(
-				'class'=>'span6'
-			));
-				$this->widget('bootstrap.widgets.TbEditableDetailView', array(
-					'id' => 'user-details',
-					'data' => $model,
-					'url' => $this->createUrl('#'),  //common submit url for all editables
-					'attributes'=>$fields
-				));
-			echo CHtml::closeTag('div');
-
 				
+		echo CHtml::closeTag('div');
+		
+		echo CHtml::openTag('div', array(
+			'class'=>'span8 offset2'
+		));
+			$this->widget('bootstrap.widgets.TbEditableDetailView', array(
+				'id' => 'user-details',
+				'data' => $model,
+				'url' => $this->createUrl('#'),  //common submit url for all editables
+				'attributes'=>$fields
+			));
 		echo CHtml::closeTag('div');
 		
 	echo CHtml::closeTag('div');

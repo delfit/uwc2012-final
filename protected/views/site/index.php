@@ -1,23 +1,16 @@
 <?php
 $this->pageTitle = Yii::app()->name;
-?>
+$baseURL = Yii::app()->request->baseUrl;
 
-
-<?php
-$this->beginWidget( 'bootstrap.widgets.TbHeroUnit', array(
-	'heading' => 'Hello, world!',
-));
-?>
-
-<p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-<p>
-	<?php
+	echo CHtml::image($baseURL."/images/linkedin.jpg", "LinkedIn", array(
+		'style' => 'display: block; margin: 0 auto;'
+	));
+	
 	$this->widget( 'bootstrap.widgets.TbButton', array(
 		'type' => 'primary',
 		'size' => 'large',
-		'label' => 'Learn more',
+		'label' => 'Generate CV',
+		'url' => $baseURL.'/profile',
 	));
-	?>
-</p>
+?>
 
-<?php $this->endWidget(); ?>

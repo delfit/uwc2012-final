@@ -18,8 +18,8 @@ class Controller extends CController
 	 */
 	public $mainMenu = array(
 		array( 'label' => 'Home', 'url' => '#', 'active' => true ),
-		array( 'label' => 'Link', 'url' => '#' ),
-		array( 'label' => 'Link', 'url' => '#' ),
+		array( 'label' => 'Profile', 'url' =>'#' ),
+		array( 'label' => 'Settings', 'url' =>'#' ),
 	);
 	
 	/**

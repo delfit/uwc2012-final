@@ -24,5 +24,10 @@ body
 body .navbar .brand, 
 body .navbar .nav > li > a 
 {
-	color: #444444;
+	color: #444;
+}
+
+body .navbar .nav > li > a:hover
+{
+	color: #aaa;
 }
