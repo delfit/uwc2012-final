@@ -77,6 +77,10 @@ return array(
 			),
 		),
 		
+		'linkedin' => array(
+			'class' => 'application.components.Linkedin',
+		),
+		
 		'session' => array (
 			'autoStart' => true,
 		),
