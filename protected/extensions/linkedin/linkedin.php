@@ -258,18 +258,18 @@ class linkedin {
 	
 	public function getProfile() {
 		return array(
-			'id' => $this->_id->asXML(),
-			'firstName' => $this->_firstname->asXML(),
-			'lastName' => $this->_lastname->asXML(),
-			'pictureURL' => $this->_pictureURL->asXML(),
-			'publicURL' => $this->_publicURL->asXML(),
-			'headLine' => $this->_headline->asXML(),
-			'currentStatus' => $this->_currentStatus->asXML(),
-			'locationName' => $this->_locationName->asXML(),
-			'locationCountryCode' => $this->_locationCountryCode->asXML(),
-			'distance' => $this->_distance->asXML(),
-			'summary' => $this->_summary->asXML(),
-			'industry' => $this->_industry->asXML()
+			'id' => $this->_id,
+			'firstName' => $this->_firstname,
+			'lastName' => $this->_lastname,
+			'pictureURL' => $this->_pictureURL,
+			'publicURL' => $this->_publicURL,
+			'headLine' => $this->_headline,
+			'currentStatus' => $this->_currentStatus,
+			'locationName' => $this->_locationName,
+			//'locationCountryCode' => $this->_locationCountryCode->asXML(),
+			'distance' => $this->_distance,
+			'summary' => $this->_summary,
+			'industry' => $this->_industry
 		);
 	}
 }

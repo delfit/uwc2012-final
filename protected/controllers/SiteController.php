@@ -51,33 +51,6 @@ class SiteController extends Controller
                     )
             );
         }
-		
-		public function actionProfile() {
-			$form = new ProfileForm();
-			
-			$form->id = 1; 
-			$form->firstName = 'John'; 
-			$form->lastName = 'White'; 
-			$form->pictureUrl = 'http://placehold.it/200x250';
-			$form->publicProfileUrl = '';
-			$form->headline = 'Headline'; 
-			$form->currentStatus = 'Status'; 
-			$form->location = 'USA';
-			$form->distance = ''; 
-			$form->summary = '';
-			$form->industry = ''; 
-			$form->specialties = '';
-			$form->positions = '';
-			$form->educations = '';
-			
-			$this->render(
-					'profile',
-				array(
-					'model'=>$form
-				)
-			);
-		}
-
 
 	/**
 	 * This is the action to handle external exceptions.

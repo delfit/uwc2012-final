@@ -2,7 +2,7 @@
 	echo CHtml::openTag('div', array(
 		'class'=>'row-fluid'
 	));
-		echo CHtml::image($model['pictureUrl'], 'photo', array(
+		echo CHtml::image($model['pictureURL'], 'photo', array(
 			'class'=>'pull-left',
 			'style'=>'margin-top: 10px;',
 		));
@@ -36,11 +36,11 @@
 				}
 			echo CHtml::closeTag('h1');
 			
-			if( $model['headline'] ) {
+			if( $model['headLine'] ) {
 				$this->widget('bootstrap.widgets.TbEditableField', array(
 					'type'      => 'text',
 					'model'     => $model,
-					'attribute' => 'headline',
+					'attribute' => 'headLine',
 					'url'       => $this->createUrl('#'),  //url for submit data
 					'enabled'   => true,
 					'placement'    => 'bottom',
@@ -51,7 +51,7 @@
 			}
 			$fields = array();
 			foreach( $model as $key=>$value ) {
-				if( $key == 'pictureUrl' || $key == 'firstName' || $key == 'lastName' || $key == 'headline' ) {
+				if( $key == 'pictureURL' || $key == 'firstName' || $key == 'lastName' || $key == 'headLine' ) {
 					continue;
 				}
 				if( $key == 'id' ) {

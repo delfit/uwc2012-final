@@ -3,11 +3,11 @@
         public $id;
         public $firstName;
 		public $lastName;
-        public $pictureUrl;
-		public $publicProfileUrl;
-        public $headline;
+        public $pictureURL;
+		public $publicURL;
+        public $headLine;
 		public $currentStatus;
-        public $location;
+        public $locationName;
 		public $distance;
         public $summary;
 		public $industry;
