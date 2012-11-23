@@ -26,7 +26,7 @@
 						'type'      => 'text',
 						'model'     => $model,
 						'attribute' => 'firstName',
-						'url'       => $this->createUrl('#'),  //url for submit data
+						'url'       => $this->createUrl('profile/update'),  //url for submit data
 						'enabled'   => true,
 						'placement'    => 'bottom',
 						'htmlOptions' => array(
@@ -40,7 +40,7 @@
 						'type'      => 'text',
 						'model'     => $model,
 						'attribute' => 'lastName',
-						'url'       => $this->createUrl('#'),  //url for submit data
+						'url'       => $this->createUrl('profile/update'),  //url for submit data
 						'enabled'   => true,
 						'placement'    => 'bottom',
 					 ));
@@ -52,7 +52,7 @@
 					'type'      => 'text',
 					'model'     => $model,
 					'attribute' => 'headLine',
-					'url'       => $this->createUrl('#'),  //url for submit data
+					'url'       => $this->createUrl('profile/update'),  //url for submit data
 					'enabled'   => true,
 					'placement'    => 'bottom'
 				 ));
@@ -75,7 +75,7 @@
 			$this->widget('bootstrap.widgets.TbEditableDetailView', array(
 				'id' => 'user-details',
 				'data' => $model,
-				'url' => $this->createUrl('#'),  //common submit url for all editables
+				'url' => $this->createUrl('profile/update'),  //common submit url for all editables
 				'attributes'=>$fields
 			));
 		echo CHtml::closeTag('div');

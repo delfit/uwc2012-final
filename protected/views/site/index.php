@@ -12,7 +12,7 @@ $baseURL = Yii::app()->request->baseUrl;
 			'type' => 'primary',
 			'size' => 'large',
 			'label' => 'Generate CV',
-			'url' => $baseURL.'/profile',
+			'url' => $baseURL.'/profile/view',
 		));
 	echo CHtml::closeTag( 'div' );
 ?>
