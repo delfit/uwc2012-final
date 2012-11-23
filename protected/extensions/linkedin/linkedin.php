@@ -249,20 +249,6 @@ class linkedin {
 			}
 		}
 		
-//		return array(
-//			'id' => $this->_id,
-//			'firstName' => $this->_firstName,
-//			'lastName' => $this->_lastName,
-//			'pictureURL' => $this->_pictureURL,
-//			'publicURL' => $this->_publicURL,
-//			'headLine' => $this->_headLine,
-//			'currentStatus' => $this->_currentStatus,
-//			'locationName' => $this->_locationName,
-//			//'locationCountryCode' => $this->_locationCountryCode,
-//			'distance' => $this->_distance,
-//			'summary' => $this->_summary,
-//			'industry' => $this->_industry
-//		);
 		
 		return $profileAttributes;
 	}
