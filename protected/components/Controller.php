@@ -20,7 +20,7 @@ class Controller extends CController
 	 */
 	public $mainMenu = array(
 		array( 'label' => 'Home', 'url' => '#' ),
-		array( 'label' => 'Profile', 'url' => 'profile/profile' ),
+		array( 'label' => 'Profile', 'url' => 'profile' ),
 		array( 'label' => 'Settings', 'url' => 'profile/setting' ),
 	);
 	

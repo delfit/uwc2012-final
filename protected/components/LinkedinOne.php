@@ -12,7 +12,6 @@
 class LinkedinOne extends CApplicationComponent
 {
 	public function __construct() {
-		unset(  Yii::app()->session[ 'ProfileActiveAttributes' ] );
 		if( !isset( Yii::app()->session[ 'ProfileActiveAttributes' ] ) ) {
 			$aviableAttributes = $this->getProfileAviableAttributes();
 			$activeAttributes = array();

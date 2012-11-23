@@ -59,7 +59,7 @@
 			}
 			$fields = array();
 			foreach( $model as $key=>$value ) {
-				if( $key == 'pictureURL' || $key == 'firstName' || $key == 'lastName' || $key == 'headLine' ) {
+				if( $key == 'pictureURL' || $key == 'firstName' || $key == 'lastName' || $key == 'headLine' || $key == 'primaryKey' ) {
 					continue;
 				}
 				if( $key == 'id' ) {
