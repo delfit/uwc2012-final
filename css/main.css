@@ -2,6 +2,12 @@
 	body .navbar, #footer, body a.print-button {
 		display: none;
 	}
+	body .content {
+		border: 10px solid #111;
+	}
+	body div.profile-container {
+		margin-left: 0 !important;
+	}
 }
 
 .image-block>img, .image-block>a {

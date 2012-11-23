@@ -3,7 +3,7 @@
 		'class'=>'row-fluid'
 	));
 		echo CHtml::openTag('div', array(
-			'class'=>'span6 offset2'
+			'class'=>'span6 offset3 profile-container'
 		));
 			echo CHtml::openTag('div', array(
 				'class'=>'span2 image-block'
