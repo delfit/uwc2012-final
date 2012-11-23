@@ -1,5 +1,5 @@
 <?php
-	class ProfileForm extends CFormModel{
+	class ProfileForm extends CFormModel{	
         public $id;
         public $firstName;
 		public $lastName;
@@ -16,6 +16,12 @@
 		public $positions;
         public $educations;
 		
+		public function rules() {
+			return array(
+				array( 'firstName, lastName, publicURL, headLine, currentStatus, locationName, locationCountryCode, distance, summary, industry, specialties, positions, educations', 'length', 'min' => 5 ),
+			);
+		}
+		
 		public function hasAttribute() {
 			return true;
 		}
@@ -25,5 +31,10 @@
 		}
 		
 		public $primaryKey = 1;
-    }
+    
+		
+		public function getTableSchema() {
+			return (object) array( 'columns' => array() );
+		}
+	}
 ?>
