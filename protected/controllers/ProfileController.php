@@ -25,6 +25,7 @@ class ProfileController extends Controller
 	}
 	
 	public function actionSetting() {
+		$model = new ProfileForm();
 		if( isset( $_POST[ 'ProfileForm' ] ) && is_array( $_POST[ 'ProfileForm' ] ) ) {
 			$attributes = array();
 			foreach( $_POST[ 'ProfileForm' ] as $rawAttributeName => $rawAttributeValue ) {
@@ -40,7 +41,8 @@ class ProfileController extends Controller
 			'setting',
 			array(
 				'attributes' => Yii::app()->linkedin->getProfileAviableAttributes(),
-				'checkedAttributes' => Yii::app()->linkedin->getActiveAttributes()
+				'checkedAttributes' => Yii::app()->linkedin->getActiveAttributes(),
+				'model' => $model,
 			)
 		);
 	}

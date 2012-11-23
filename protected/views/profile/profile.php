@@ -3,12 +3,23 @@
 		'class'=>'row-fluid'
 	));
 		echo CHtml::openTag('div', array(
-			'class'=>'span8 offset2'
+			'class'=>'span6 offset2'
 		));
-			echo CHtml::image($model['pictureURL'], 'photo', array(
-				'class'=>'pull-left',
-				'style'=>'margin-top: 10px;',
+			echo CHtml::openTag('div', array(
+				'class'=>'span2 image-block'
 			));
+				echo CHtml::image($model['pictureURL'], 'photo');
+
+				$this->widget('bootstrap.widgets.TbButton',array(
+					'label' => 'Print',
+					'type' => 'primary',
+					'size' => 'large',
+					'htmlOptions' => array(
+						'class' => 'print-button',
+						'onclick'=>"window.print();",
+					)
+				));
+			echo CHtml::closeTag('div');
 			echo CHtml::openTag('h1');
 				if( $model['firstName'] ) {
 					$this->widget('bootstrap.widgets.TbEditableField', array(
@@ -43,7 +54,7 @@
 					'attribute' => 'headLine',
 					'url'       => $this->createUrl('#'),  //url for submit data
 					'enabled'   => true,
-					'placement'    => 'bottom',
+					'placement'    => 'bottom'
 				 ));
 			}
 			$fields = array();
@@ -61,11 +72,6 @@
 
 			}
 				
-		echo CHtml::closeTag('div');
-		
-		echo CHtml::openTag('div', array(
-			'class'=>'span8 offset2'
-		));
 			$this->widget('bootstrap.widgets.TbEditableDetailView', array(
 				'id' => 'user-details',
 				'data' => $model,

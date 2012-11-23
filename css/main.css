@@ -1,3 +1,14 @@
+@media print {
+	body .navbar, #footer, a.print-button {
+		display: none;
+	}
+}
+
+.image-block>img, .image-block>a {
+	display: block;
+	margin: 5px 0;
+}
+
 body
 {
 	background: #EFEFEF;
@@ -5,6 +16,10 @@ body
 	font: normal 10pt Arial,Helvetica,sans-serif;
 	margin: 0;
 	padding: 45px 0 0 0;
+}
+
+.margined {
+	padding: 10px;
 }
 
 #footer
