@@ -66,6 +66,11 @@
 
 			return Yii::t( strtolower( 'application' ), $label );
 		}
+		
+		
+		public function getTableSchema() {
+			return (object) array( 'columns' => array() );
+		}
     }
 	
 	
