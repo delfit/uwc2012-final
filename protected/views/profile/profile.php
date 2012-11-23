@@ -67,11 +67,15 @@
 					continue;
 				}
 				if( $value ) {
-					$fields[] = $key;
+					$fields[] = array(
+						'name' => $key,
+						'editable' => array(
+							'type' => 'text'
+						)
+					);
 				}
 
 			}
-				
 			$this->widget('bootstrap.widgets.TbEditableDetailView', array(
 				'id' => 'user-details',
 				'data' => $model,

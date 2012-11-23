@@ -25,5 +25,42 @@
 		}
 		
 		public $primaryKey = 1;
+		
+		
+		public function attributeLabels() 
+		{ 
+			return array(
+				'id' => 'id',
+				'firstName' => 'firstName',
+				'lastName' => 'lastName',
+				'pictureURL' => 'pictureURL',
+				'publicURL' => 'publicURL',
+				'headLine' => 'headLine',
+				'currentStatus' => 'currentStatus',
+				'locationName' => 'locationName',
+				'locationCountryCode' => 'locationCountryCode',
+				'distance' => 'distance',
+				'summary' => 'summary',
+				'industry' => 'industry',
+				'specialties' => 'specialties',
+				'positions' => 'positions',
+				'educations' => 'educations',
+			); 
+		}
+		
+		/**
+	 * Получить локализированное название атрибута
+	 * 
+	 * @param type $attribute
+	 * 
+	 * @return локализированное название атрибута
+	 */
+		public function getAttributeLabel( $attribute ) {
+			$label = parent::getAttributeLabel( $attribute );
+
+			return Yii::t( strtolower( 'application' ), $label );
+		}
     }
+	
+	
 ?>
