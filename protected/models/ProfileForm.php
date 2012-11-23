@@ -8,6 +8,7 @@
         public $headLine;
 		public $currentStatus;
         public $locationName;
+		public $locationCountryCode;
 		public $distance;
         public $summary;
 		public $industry;
