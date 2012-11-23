@@ -2,11 +2,6 @@
 
 class ProfileController extends Controller
 {
-
-	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
-	 */
 	public function actionIndex() {		
 		Yii::import( 'application.extensions.linkedin.*' );
 		$linkedin = new linkedin();
@@ -21,54 +16,31 @@ class ProfileController extends Controller
 			$form->{$key}=$value;
 		}
 
-//		$form->id = $profile['id']; 
-//		$form->firstName = 'John'; 
-//		$form->lastName = 'White'; 
-//		$form->pictureUrl = 'http://placehold.it/200x250';
-//		$form->publicProfileUrl = '';
-//		$form->headline = 'Headline'; 
-//		$form->currentStatus = 'Status'; 
-//		$form->location = 'USA';
-//		$form->distance = ''; 
-//		$form->summary = '';
-//		$form->industry = ''; 
-//		$form->specialties = '';
-//		$form->positions = '';
-//		$form->educations = '';
-
 		$this->render(
 				'profile',
 			array(
 				'model'=>$form
 			)
 		);
-	}	
-	
-	public function actionAuth() {
 	}
 	
-	public function actionProfile() {
-		$form = new ProfileForm();
+	public function actionSetting() {
+		if( isset( $_POST[ 'ProfileForm' ] ) && is_array( $_POST[ 'ProfileForm' ] ) ) {
+			$attributes = array();
+			foreach( $_POST[ 'ProfileForm' ] as $rawAttributeName => $rawAttributeValue ) {
+				if( $rawAttributeValue ) {
+					$attributes[] = $rawAttributeName;
+				}
+			}
+		
+			Yii::app()->linkedin->setActiveAttributes( $attributes );
+		}
 
-		$form->id = 1; 
-		$form->firstName = 'John'; 
-		$form->lastName = 'White'; 
-		$form->pictureUrl = 'http://placehold.it/200x250';
-		$form->publicURL = '';
-		$form->headLine = 'Headline'; 
-		$form->currentStatus = 'Status'; 
-		$form->location = 'USA';
-		$form->distance = ''; 
-		$form->summary = '';
-		$form->industry = ''; 
-		$form->specialties = '';
-		$form->positions = '';
-		$form->educations = '';
-
-		$this->render(
-				'profile',
+		$this->render( 
+			'setting',
 			array(
-				'model'=>$form
+				'attributes' => Yii::app()->linkedin->getProfileAviableAttributes(),
+				'checkedAttributes' => Yii::app()->linkedin->getActiveAttributes()
 			)
 		);
 	}
