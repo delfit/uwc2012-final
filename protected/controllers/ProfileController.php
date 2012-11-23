@@ -41,7 +41,7 @@ class ProfileController extends Controller
 		foreach( $activeAttributes as $activeAttribute ) {
 			$model->{$activeAttribute} = true;
 		}
-		
+
 		$this->render( 
 			'setting',
 			array(
