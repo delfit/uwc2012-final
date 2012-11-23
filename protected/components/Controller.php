@@ -12,14 +12,16 @@ class Controller extends CController
 	 * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
 	 */
 	public $layout = '//layouts/column1';
+//	public $profileURL = Yii::app()->createUrl( 'profile/profile' );
+//	public $settingsURL = Yii::app()->createUrl( 'profile/setting' );
 
 	/**
 	 * @var array main menu items
 	 */
 	public $mainMenu = array(
-		array( 'label' => 'Home', 'url' => '#', 'active' => true ),
-		array( 'label' => 'Profile', 'url' =>'#' ),
-		array( 'label' => 'Settings', 'url' =>'#' ),
+		array( 'label' => 'Home', 'url' => '#' ),
+		array( 'label' => 'Profile', 'url' => 'profile/profile' ),
+		array( 'label' => 'Settings', 'url' => 'profile/setting' ),
 	);
 	
 	/**
