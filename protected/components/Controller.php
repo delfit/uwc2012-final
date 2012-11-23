@@ -40,7 +40,7 @@ class Controller extends CController
 
 		// создать главное меню сайта из категорий
 		$this->mainMenu = array(
-			array( 'label' => 'Home', 'url' => '#', 'active' => true ),
+			array( 'label' => 'Home', 'url' => $this->createUrl( 'site/index', $this->getActionParams() ), 'active' => true ),
 			array( 
 				'label' => 'Profile', 'url' => $this->createUrl( 'profile/view', $this->getActionParams() )
 			),
