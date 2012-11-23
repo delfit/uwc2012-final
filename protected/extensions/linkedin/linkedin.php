@@ -18,19 +18,17 @@ session_start();
 require_once("oauth.php");
 require_once("config.php");
 
-
-
 class linkedin {
 
 	protected $signatureMethod;
 	protected $consumer;
 
 	protected $_id;
-	protected $_firstname;
-	protected $_lastname;
+	protected $_firstName;
+	protected $_lastName;
 	protected $_pictureURL;
 	protected $_publicURL;
-	protected $_headline;
+	protected $_headLine;
 	protected $_currentStatus;
 	protected $_locationName;
 	protected $_locationCountryCode;
@@ -68,7 +66,6 @@ class linkedin {
   	}
 
 	function init() {
-
 		$this->_public = false;
 
 		$this->signatureMethod = new OAuthSignatureMethod_HMAC_SHA1();
@@ -99,6 +96,7 @@ class linkedin {
 	}
 
 	function get_access_token() {
+
 	        $token = new OAuthConsumer($_REQUEST['oauth_token'], $_SESSION['oauth_token_secret'], 1);
 
 	        $accObj = OAuthRequest::from_consumer_and_token($this->consumer, $token, "POST", BASE_API_URL.ACC_PATH);
@@ -108,29 +106,16 @@ class linkedin {
 
 		$output = $this->get_curl_response($toHeader, BASE_API_URL.ACC_PATH);
 		parse_str($output, $oauth);
-
+		
+		if( isset( $oauth['oauth_token'] ) ) {
 	        $_SESSION['oauth_token'] = $oauth['oauth_token'];
 	        $_SESSION['oauth_token_secret'] = $oauth['oauth_token_secret'];
+		}	
 	}
 
 	function get_profile($requestURL) {
-		$profileFields = array(
-			'id', 
-			'first-name', 
-			'last-name', 
-			'picture-url',
-			'public-profile-url',
-			'headline', 
-			'current-status', 
-			'location', 
-			'distance', 
-			'summary',
-			'industry', 
-			'specialties',
-			'positions',
-			'educations'
-		);
-
+		$profileFields = Yii::app()->linkedin->getRemouteActiveAttributes();
+		
 		$endpoint = $requestURL.":(".implode(',', $profileFields).")";
         
 		$token = new OAuthConsumer($_SESSION['oauth_token'], $_SESSION['oauth_token_secret'], 1);
@@ -147,7 +132,6 @@ class linkedin {
 	}
 
 	function get_public_profile_by_public_url($publicURL) {
-
 		if($this->_public)
 			$this->parse_public_profile($this->get_curl_response(null, $publicURL, false));
 		else
@@ -166,10 +150,10 @@ class linkedin {
 			$this->_id = $profileXML->{'id'};
 
 		if(isset($profileXML->{'first-name'}))
-			$this->_firstname = $profileXML->{'first-name'};
+			$this->_firstName = $profileXML->{'first-name'};
 
 		if(isset($profileXML->{'last-name'}))
-			$this->_lastname = $profileXML->{'last-name'};
+			$this->_lastName = $profileXML->{'last-name'};
 
 		if(isset($profileXML->{'picture-url'}))
 			$this->_pictureURL = $profileXML->{'picture-url'};
@@ -178,7 +162,7 @@ class linkedin {
 			$this->_publicURL = $profileXML->{'public-profile-url'};
 
 		if(isset($profileXML->headline))
-			$this->_headline = $profileXML->headline;
+			$this->_headLine = $profileXML->headline;
 
 		if(isset($profileXML->{'current-status'}))
 			$this->_currentStatus = $profileXML->{'current-status'};
@@ -202,21 +186,21 @@ class linkedin {
 
 	function parse_public_profile($data) {
 
-		preg_match('/<span class=\"given-name\">(.*?)<\/span>/is', $data, $_firstname);
-		if(isset($_firstname[1]))
-			$this->_firstname = trim($_firstname[1]);
+		preg_match('/<span class=\"given-name\">(.*?)<\/span>/is', $data, $_firstName);
+		if(isset($_firstName[1]))
+			$this->_firstName = trim($_firstName[1]);
 
-		preg_match('/<span class=\"family-name\">(.*?)<\/span>/is', $data, $_lastname);
-		if(isset($_lastname[1]))
-			$this->_lastname = trim($_lastname[1]);
+		preg_match('/<span class=\"family-name\">(.*?)<\/span>/is', $data, $_lastName);
+		if(isset($_lastName[1]))
+			$this->_lastName = trim($_lastName[1]);
 
 		preg_match('/<div class=\"image\"><img src=\"(.*?)\"(.)*\/><\/div>/', $data, $_pictureURL);
 		if(isset($_pictureURL[1]))
 			$this->_pictureURL = trim($_pictureURL[1]);
 
-		preg_match('/<p class=\"headline title\">(.*?)<\/p>/is', $data, $_headline);
-		if(isset($_headline[1]))
-			$this->_headline = trim($_headline[1]);
+		preg_match('/<p class=\"headline title\">(.*?)<\/p>/is', $data, $_headLine);
+		if(isset($_headLine[1]))
+			$this->_headLine = trim($_headLine[1]);
 
 		preg_match('/<p class=\"locality\">(.*?)<\/p>/is', $data, $_locationCountryCode);
 		if(isset($_locationCountryCode[1]))
@@ -234,15 +218,15 @@ class linkedin {
 
 	function get_member_token() { return $this->_id; }
 
-	function get_firstname() { return $this->_firstname; }
+	function get_firstName() { return $this->_firstName; }
 
-	function get_lastname() { return $this->_lastname; }
+	function get_lastName() { return $this->_lastName; }
 
 	function get_picture_url() { return $this->_pictureURL; }
 
 	function get_public_profile_url() { return $this->_publicURL; }
 
-	function get_headline() { return $this->_headline; }
+	function get_headLine() { return $this->_headLine; }
 
 	function get_current_status() { return $this->_currentStatus; }
 
@@ -257,20 +241,16 @@ class linkedin {
 	function get_industry() { return $this->_industry; }
 	
 	public function getProfile() {
-		return array(
-			'id' => $this->_id,
-			'firstName' => $this->_firstname,
-			'lastName' => $this->_lastname,
-			'pictureURL' => $this->_pictureURL,
-			'publicURL' => $this->_publicURL,
-			'headLine' => $this->_headline,
-			'currentStatus' => $this->_currentStatus,
-			'locationName' => $this->_locationName,
-			//'locationCountryCode' => $this->_locationCountryCode->asXML(),
-			'distance' => $this->_distance,
-			'summary' => $this->_summary,
-			'industry' => $this->_industry
-		);
+		$profileFields = Yii::app()->linkedin->getActiveAttributes();
+		$profileAttributes = array();
+		foreach( $profileFields as $profileField ) {
+			if( property_exists( $this, '_' . $profileField ) ) {
+				$profileAttributes[ $profileField ] = $this->{'_' . $profileField};
+			}
+		}
+		
+		
+		return $profileAttributes;
 	}
 }
 

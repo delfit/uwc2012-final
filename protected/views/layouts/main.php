@@ -51,8 +51,9 @@
 			
 			
 			<div id="footer">
-				&copy; Delfit <?php echo date( 'Y' ); ?><br/>
+				&copy; Delfit <?php echo date( 'Y' );  echo " World is so beautiful"; ?><br/>
 				<?php echo Yii::powered(); ?>
+				
 			</div><!-- footer -->
 
 		</div><!-- page -->
