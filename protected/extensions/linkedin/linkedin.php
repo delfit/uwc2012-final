@@ -106,6 +106,7 @@ class linkedin {
 
 		$output = $this->get_curl_response($toHeader, BASE_API_URL.ACC_PATH);
 		parse_str($output, $oauth);
+		
 		if( isset( $oauth['oauth_token'] ) ) {
 	        $_SESSION['oauth_token'] = $oauth['oauth_token'];
 	        $_SESSION['oauth_token_secret'] = $oauth['oauth_token_secret'];
@@ -131,7 +132,6 @@ class linkedin {
 	}
 
 	function get_public_profile_by_public_url($publicURL) {
-
 		if($this->_public)
 			$this->parse_public_profile($this->get_curl_response(null, $publicURL, false));
 		else
