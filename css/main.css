@@ -1,5 +1,5 @@
 @media print {
-	body .navbar, #footer, a.print-button {
+	body .navbar, #footer, body a.print-button {
 		display: none;
 	}
 }
@@ -39,7 +39,7 @@ body
 body .navbar .brand, 
 body .navbar .nav > li > a 
 {
-	color: #444;
+	color: #005A87;
 }
 
 body .navbar .nav > li > a:hover
