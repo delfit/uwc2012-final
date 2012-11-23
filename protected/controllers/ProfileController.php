@@ -9,7 +9,8 @@ class ProfileController extends Controller
 		$linkedin->get_public_profile_by_public_url('http://www.linkedin.com/in/nileshgamit');
 
 		$profile = $linkedin->getProfile();
-		
+//		print_r( Yii::app()->linkedin->getRemouteActiveAttributes() );
+//		print_r( $profile );
 		$form = new ProfileForm();
 		
 		foreach( $profile as $key => $value ) {

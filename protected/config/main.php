@@ -78,7 +78,7 @@ return array(
 		),
 		
 		'linkedin' => array(
-			'class' => 'application.components.Linkedin',
+			'class' => 'application.components.LinkedinOne',
 		),
 		
 		'session' => array (

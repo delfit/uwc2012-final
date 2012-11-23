@@ -9,12 +9,27 @@
  *
  * @author ivan
  */
-class Linkedin extends CApplicationComponent
+class LinkedinOne extends CApplicationComponent
 {
+	public function __construct() {
+		unset(  Yii::app()->session[ 'ProfileActiveAttributes' ] );
+		if( !isset( Yii::app()->session[ 'ProfileActiveAttributes' ] ) ) {
+			$aviableAttributes = $this->getProfileAviableAttributes();
+			$activeAttributes = array();
+			foreach( $aviableAttributes as $category ) {
+				foreach( $category[ 'items' ] as $item ) {
+					$activeAttributes[] = $item[ 'name' ];
+				}
+			}
+			
+			$this->setActiveAttributes( $activeAttributes );
+		}
+	}
+
 	public function getProfileAviableAttributes() {
 		return array(
 			array(
-				'category' => 'Identification data',
+				'category' => Yii::t( 'application', 'Identification data' ),
 				'items' => array(
 					array(
 						'name' => 'id',
@@ -27,7 +42,7 @@ class Linkedin extends CApplicationComponent
 				)
 			),
 			array(
-				'category' => 'Personal data',
+				'category' => Yii::t( 'application', 'Personal data' ),
 				'items' => array(
 					array(
 						'name' => 'firstName',
@@ -45,7 +60,7 @@ class Linkedin extends CApplicationComponent
 			),
 			
 			array(
-				'category' => 'Other',
+				'category' => Yii::t( 'application', 'Other' ),
 				'items' => array(
 					array(
 						'name' => 'headLine',
@@ -59,10 +74,10 @@ class Linkedin extends CApplicationComponent
 						'name' => 'locationName',
 						'title' => Yii::t( 'application', 'locationName' )
 					),
-					array(
-						'name' => 'locationCountryCode',
-						'title' => Yii::t( 'application', 'locationCountryCode' )
-					),
+//					array(
+//						'name' => 'locationCountryCode',
+//						'title' => Yii::t( 'application', 'locationCountryCode' )
+//					),
 					array(
 						'name' => 'distance',
 						'title' => Yii::t( 'application', 'distance' )
@@ -93,6 +108,36 @@ class Linkedin extends CApplicationComponent
 		}
 		
 		return array();
+	}
+	
+	public function getRemouteActiveAttributes() {
+		$localToRemoute = array(
+			'id' => 'id', 
+			'firstName' => 'first-name', 
+			'lastName' => 'last-name', 
+			'pictureURL' => 'picture-url',
+			'publicURL' => 'public-profile-url',
+			'headLine' => 'headline', 
+			'currentStatus' => 'current-status', 
+			'locationName' => 'location', 
+			'distance' => 'distance', 
+			'summary' => 'summary',
+			'industry' => 'industry', 
+			'specialties' => 'specialties',
+			'positions' => 'positions',
+			'educations' => 'educations'
+		);
+		
+		$activeAttributes = $this->getActiveAttributes();
+		$remouteActiveAttributes = array();
+		foreach( $activeAttributes as $activeAttribute ) {
+			if( key_exists( $activeAttribute, $localToRemoute ) ) {
+				$remouteActiveAttributes[] = $localToRemoute[ $activeAttribute ];
+			}
+		}
+		
+		
+		return  $remouteActiveAttributes;
 	}
 }
 
