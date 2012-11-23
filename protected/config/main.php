@@ -9,7 +9,7 @@ return array(
 	
 	'name' => 'UWC2012 Final',
 	
-	'language' => 'ru', 
+	'language' => 'ru',
 	
 	// preloading 'log' component
 	'preload' => array( 

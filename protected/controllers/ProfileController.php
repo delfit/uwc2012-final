@@ -2,7 +2,7 @@
 
 class ProfileController extends Controller
 {
-	public function actionIndex() {		
+	public function actionView() {		
 		Yii::import( 'application.extensions.linkedin.*' );
 		$linkedin = new linkedin();
 		$linkedin->init();
