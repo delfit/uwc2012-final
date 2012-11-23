@@ -6,8 +6,8 @@ class ProfileController extends Controller
 		Yii::import( 'application.extensions.linkedin.*' );
 		$linkedin = new linkedin();
 		$linkedin->init();
-		$linkedin->get_public_profile_by_public_url('http://www.linkedin.com/pub/alexey-slobodiskiy/36/344/61b');
-		//$linkedin->get_logged_in_users_profile();
+		//$linkedin->get_public_profile_by_public_url('http://www.linkedin.com/pub/alexey-slobodiskiy/36/344/61b');
+		$linkedin->get_logged_in_users_profile();
 
 		$profile = $linkedin->getProfile();
 		$form = new ProfileForm();
