@@ -88,6 +88,12 @@ class AlbumController extends Controller
 					'caption'=> $_POST[ 'PhotoForm' ][ 'caption' ],
 					'image' => '@' . realpath( $_FILES[ 'PhotoForm' ][ 'tmp_name' ][ 'file' ] )
 				) );
+	
+				if( isset( $upload_photo[ 'id' ] ) ) {
+					$newPhoto = new FBPhotoStream();
+					$newPhoto->FBPhotoID = $upload_photo[ 'id' ];
+					$newPhoto->save();
+				}
 			}
 		}
 		
