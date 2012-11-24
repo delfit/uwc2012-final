@@ -14,7 +14,7 @@
 	</head>
 
 	<body>
-		<div class="container" id="page">
+		<div class="container-fluid" id="page">
 			<div id="header">
 				<?php
 				

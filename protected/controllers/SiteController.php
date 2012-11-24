@@ -13,6 +13,12 @@ class SiteController extends Controller
 			'index'
 		);
 	}
+	
+	public function actionAlbums() {
+		$this->render(
+			'album'
+		);
+	}
 
 
 	/**
