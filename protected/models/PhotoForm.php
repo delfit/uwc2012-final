@@ -1,7 +1,6 @@
 <?php
 class PhotoForm extends CFormModel{	
-	public $name;
-	public $description;
+	public $caption;
 	public $file;
 }
 ?>

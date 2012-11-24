@@ -124,17 +124,14 @@ $albums = array(
 						echo CHtml::openTag('legend');
 							echo 'Добавить фотографию';
 						echo CHtml::closeTag('legend');
-						echo $form->textFieldRow( $model, 'name', array(
+						
+						echo $form->textFieldRow( $model, 'caption', array(
 							'class' => 'input-xlarge',
 							'style' => 'margin-right: 5%;'
 						));
-						echo $form->textFieldRow( $model, 'description', array(
+						echo $form->fileField( $model, 'file', array(
 							'class' => 'input-xlarge',
 							'style' => 'margin-right: 5%;'
-						));
-						echo $form->fileField( $model, 'description', array(
-							'class' => 'input-xlarge',
-							'style' => 'margin-top: 2%;'
 						));
 						$this->widget('bootstrap.widgets.TbButton', array(
 							'type' => 'primary', 
@@ -159,7 +156,11 @@ $albums = array(
 			echo CHtml::openTag('div', array(
 				'class' => 'photo',
 			));
-				
+				echo CHtml::openTag('h4', array(
+					'style' => 'text-align: center; color: blue;'
+				));
+					echo 'Album Name (hardcoded)';
+				echo CHtml::closeTag('h4');
 				$thumbDataProvider = new CArrayDataProvider($albums, array(
 					'id'=>'albums',
 					'pagination'=>array(
