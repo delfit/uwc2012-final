@@ -4,10 +4,9 @@
 			'style' => 'margin: 2% 5%;'
 		) );
 			echo CHtml::openTag('a',  array(
-				'href' => '#',
+				'href' => $data['src_big'],
 				'target' => '_self',
-				'data-toggle'=>'modal',
-				'data-target'=>'#myModal',
+				'rel' => 'lightbox-image',
 			));
 				echo CHtml::image($data['src_big'], 'photo', array(
 					'style' => 'display: block; margin: 1% auto;'
