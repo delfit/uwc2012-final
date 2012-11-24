@@ -100,39 +100,4 @@
 		echo CHtml::closeTag('div');
 		
 	echo CHtml::closeTag('div');
-	
-	
-$this->beginWidget('bootstrap.widgets.TbModal', array('id'=>'myModal'));
- 
-	echo CHtml::openTag('div', array(
-		'class' => 'modal-header'
-	));
-		echo CHtml::openTag('a', array(
-			'class' => 'close',
-			'data-dismiss' => "modal"
-		));
-		echo '×';
-		echo CHtml::closeTag('a');
-	echo CHtml::closeTag('div');
-	echo CHtml::openTag('div', array(
-			'class' => 'modal-body'
-		));
-
-	echo CHtml::closeTag('div');
-	echo CHtml::openTag('div', array(
-		'class' => 'modal-footer'
-	));
-		$this->widget('bootstrap.widgets.TbButton', array(
-			'type'=>'primary',
-			'label'=>'Like',
-			'url'=>'#',
-			'htmlOptions'=>array('data-dismiss'=>'modal'),
-		));
-			$this->widget('bootstrap.widgets.TbButton', array(
-			'label'=>'Close',
-			'url'=>'#',
-			'htmlOptions'=>array('data-dismiss'=>'modal'),
-		));
-	echo CHtml::closeTag('div');
- $this->endWidget();
 ?>
