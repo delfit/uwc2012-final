@@ -116,24 +116,7 @@ $albums = array(
 					'label' => 'Добавить альбом',
 				));
 				
-				echo CHtml::openTag('div', array(
-					'class' => 'addAlbum',
-				));
-					$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-						'id'=>'inlineForm',
-						'type'=>'inline',
-						'htmlOptions'=>array('class'=>'well'),
-					));
-					
-					echo $form->textFieldRow($model, 'textField', array('class'=>'input-small'));
-					echo $form->textFieldRow($model, 'textField', array('class'=>'input-small'));
-					$this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>'Создать'));
-					
-					$this->endWidget();
-					
-					
 				
-				echo CHtml::closeTag('div');
 			echo CHtml::closeTag('div');
 			
 			echo CHtml::tag('hr');
