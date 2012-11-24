@@ -42,11 +42,13 @@
 					'brand' => CHtml::encode( Yii::app()->name ), 
 					'brandUrl' => Yii::app()->homeUrl, 
 					'collapse' => true, 
-					'fluid' => false,
+					'fluid' => true,
 					'items' => array(
 						array(
 							'class' => 'bootstrap.widgets.TbMenu',
-							'items' => $this->mainMenu,
+							'items' => array(
+								array( 'label' => 'Альбомы', 'url' => Yii::app()->createUrl( 'album/list' ), 'active' => ( Yii::app()->controller->getRoute() == 'album/list' ) ),
+							),
 						),
 						
 						array(

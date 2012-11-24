@@ -1,6 +1,13 @@
 <?php
 class AlbumForm extends CFormModel{	
         public $name;
-        public $description;
+        public $message;
+		
+		public function rules() {
+			return array(
+				array( 'name', 'required' ),
+				array( 'rememberMe, message', 'safe' ),
+			);
+		}
 }
 ?>
