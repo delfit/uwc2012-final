@@ -21,7 +21,7 @@
 			echo CHtml::openTag('p', array(
 				'style' => 'text-align: center; color: gray; font-size: 0.8em; margin: 0; font-style: italic; padding: 0'
 			));
-				echo 'Количество лайков: '.$data['like_count'];
+				echo 'Количество лайков: '.$data['like_info']['like_count'];
 			echo CHtml::closeTag('p');
 		echo CHtml::closeTag( 'div' );
 ?>

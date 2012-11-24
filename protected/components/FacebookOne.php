@@ -19,13 +19,10 @@ class FacebookOne extends CApplicationComponent
 		if( isset( $_GET[ 'state' ] ) ) {
 			Yii::app()->session[ 'state' ] = $_GET[ 'state' ];
 		}
-
-		$config = array();
-		$config['appId'] = '253444551448227';
-		$config['secret'] = '06782edbbaa1cf7ca51bc631b415b097';
-		$config['fileUpload'] = true;
+		$config = Yii::app()->params[ 'FaceBook' ];
 		
-		$this->fb = new Facebook($config);
+		
+		$this->fb = new Facebook( $config );
 		
 		if( isset( Yii::app()->session[ 'AccessToken' ] ) ) {
 			$this->fb->setAccessToken( Yii::app()->session[ 'AccessToken' ] );

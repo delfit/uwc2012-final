@@ -109,6 +109,11 @@ return array(
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
 	'params' => array(
-		
+		'FaceBook' => array(
+			'appId' => '253444551448227',
+			'secret' => '06782edbbaa1cf7ca51bc631b415b097',
+			'fileUpload' => true,
+			
+		)
 	),
 );

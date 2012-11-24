@@ -72,13 +72,15 @@ class AlbumController extends Controller
 
 		$this->render( 'list', array( 
 			'albumsProvider' => new CArrayDataProvider( $albums[ 'data' ], array(
-				'id'=>'albums',
+				'id'=>'albums'
 			)),
 			'model' => $albumForm
 		));
 	}
 	
 	public function actionView( $aid ) {
+		
+		$aid = '100002102102474_90696';
 		// загружаем фото
 		if( isset( $_POST[ 'PhotoForm' ] ) ) {
 			if( isset( $_FILES[ 'PhotoForm' ][ 'tmp_name' ] ) ) {
@@ -94,7 +96,6 @@ class AlbumController extends Controller
 			SELECT aid, cover_pid, name, photo_count FROM album WHERE aid = :aid
 		';
 		$album = Yii::app()->facebook->query( $albumFql, array( ':aid' => $aid ) );
-		//$album = $this->parseData( $album );
 		
 		// обложки к альбому
 		$albumCoverFql = '
@@ -108,16 +109,24 @@ class AlbumController extends Controller
 			SELECT pid, src_big, src, link, caption, like_info FROM photo WHERE aid= :aid
 		';
 		$photos = Yii::app()->facebook->query( $photosFql, array( ':aid' => $aid ) );
+		
+		foreach( $photos[ 'data' ] as &$photo ) {
+			$photo[ 'id' ] = $photo[ 'pid' ];
+		} 
 
 		$photoForm = new PhotoForm();
 		$photoForm->aid = $aid;
+
 		$this->render( 
 			'album', 
 			array(
 					'model' => $photoForm,
-					'album' => $album[ 'data' ],
+					'album' => $album[ 'data' ][0],
 					'photosProvider' => new CArrayDataProvider( $photos[ 'data' ], array(
 						'id'=>'photos',
+						'pagination'=>array(
+							'pageSize'=>12,
+						),
 					) 
 				)
 			)
@@ -130,28 +139,6 @@ class AlbumController extends Controller
 	
 	public function getDataFiled( $data, $field ) {
 		return isset( $data[ 'data' ][0][ $field ] ) ? $data[ 'data' ][0][ $field ] : null;
-	}
-	
-	public function actionUpload() {
-		
-
-//		$_FI
-//		
-//		$attributes = array(
-//			'message'=> 'Photo message',
-//			'image' => null
-//		);
-//		
-//		$albumID = null;
-//		
-//		//Upload a photo to album of ID...
-//		$photo_details = array(
-//			'message'=> 'Photo message'
-//		);
-//
-//		$attributes[ 'image' ] = '@' . 
-//
-//		$upload_photo = $facebook->api('/'..'/photos', 'post', $photo_details);
 	}
 }
 
