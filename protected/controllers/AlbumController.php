@@ -79,8 +79,6 @@ class AlbumController extends Controller
 	}
 	
 	public function actionView( $aid ) {
-		
-		$aid = '100002102102474_90696';
 		// загружаем фото
 		if( isset( $_POST[ 'PhotoForm' ] ) ) {
 			if( isset( $_FILES[ 'PhotoForm' ][ 'tmp_name' ] ) ) {
