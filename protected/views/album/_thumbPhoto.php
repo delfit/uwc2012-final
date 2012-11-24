@@ -5,7 +5,9 @@
 		) );
 			echo CHtml::openTag('a',  array(
 				'href' => '#',
-				'target' => '_self'
+				'target' => '_self',
+				'data-toggle'=>'modal',
+				'data-target'=>'#myModal',
 			));
 				echo CHtml::image($data['src_big'], 'photo', array(
 					'style' => 'display: block; margin: 1% auto;'
