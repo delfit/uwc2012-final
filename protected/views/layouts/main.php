@@ -23,7 +23,7 @@
 					'brand' => CHtml::encode( Yii::app()->name ), 
 					'brandUrl' => Yii::app()->homeUrl, 
 					'collapse' => true, 
-					'fluid' => true,
+					'fluid' => false,
 					'items' => array(
 						array(
 							'class' => 'bootstrap.widgets.TbMenu',
