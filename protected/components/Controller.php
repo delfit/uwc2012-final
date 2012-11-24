@@ -12,14 +12,6 @@ class Controller extends CController
 	 * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
 	 */
 	public $layout = '//layouts/column1';
-
-	/**
-	 * @var array main menu items
-	 */
-	public $mainMenu = array(
-		array( 'label' => 'Главная', 'url' => '#', 'active' => true ),
-		array( 'label' => 'Альбомы', 'url' => '#' ),
-	);
 	
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.

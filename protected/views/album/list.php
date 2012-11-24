@@ -8,6 +8,23 @@ $this->breadcrumbs = array(
 );
 ?>
 
+
+<?php
+$this->widget( 'bootstrap.widgets.TbAlert', array(
+	'block' => true,
+	'fade' => true, 
+	'closeText' => '×', 
+	'alerts' => array( 
+		'success',
+		'info',
+		'warning',
+		'error',
+		'danger'
+	),
+));
+?>
+
+
 <?php
 
 	echo CHtml::openTag('div', array(
@@ -42,7 +59,7 @@ $this->breadcrumbs = array(
 							'class' => 'input-xlarge',
 							'style' => 'margin-right: 5%;'
 						));
-						echo $form->textFieldRow( $model, 'description', array(
+						echo $form->textFieldRow( $model, 'message', array(
 							'class'=>'input-xlarge',
 							'style' => 'margin-right: 5%;'
 						));

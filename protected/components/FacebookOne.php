@@ -26,6 +26,10 @@ class FacebookOne extends CApplicationComponent
 		$config['fileUpload'] = true;
 		
 		$this->fb = new Facebook($config);
+		
+		if( isset( Yii::app()->session[ 'AccessToken' ] ) ) {
+			$this->fb->setAccessToken( Yii::app()->session[ 'AccessToken' ] );
+		}
 	}
 	
 	
@@ -33,7 +37,7 @@ class FacebookOne extends CApplicationComponent
 		foreach( $params as $paramName => $value ) {
 			$query = str_replace( $paramName, '"' . $value . '"', $query );
 		}
-		
+
 		return $this->fb->api( '/fql?q=' . urlencode( $query ) );
 	}
 }
