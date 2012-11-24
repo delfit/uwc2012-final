@@ -17,9 +17,8 @@ class Controller extends CController
 	 * @var array main menu items
 	 */
 	public $mainMenu = array(
-		array( 'label' => 'Home', 'url' => '#', 'active' => true ),
-		array( 'label' => 'Link', 'url' => '#' ),
-		array( 'label' => 'Link', 'url' => '#' ),
+		array( 'label' => 'Главная', 'url' => '#', 'active' => true ),
+		array( 'label' => 'Альбомы', 'url' => '#' ),
 	);
 	
 	/**
