@@ -9,18 +9,15 @@ echo CHtml::openTag('div', array(
 		echo CHtml::openTag('div', array(
 			'class' => 'span8 offset2',
 		));
-
-			$this->widget( 'bootstrap.widgets.TbButton', array(
-				'type' => 'primary',
-				'size' => 'large',
-				'label' => 'Авторизация Facebook',
-			));
-
-			echo CHtml::tag('hr');
-
 				echo CHtml::openTag('div', array(
 					'class' => 'photo',
 				));
+				
+					echo CHtml::openTag('h3', array(
+						'style' => 'color: blue; text-align: center;'
+					));
+						echo 'Недавно добавленные:';
+					echo CHtml::closeTag('h3');
 
 					$this->widget('bootstrap.widgets.TbThumbnails', array(
 						'dataProvider'=>$newPhotosProvider,
