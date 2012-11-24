@@ -31,7 +31,18 @@ class AlbumController extends Controller
 		}
 
 		
-		$this->render( 'album', array( 'albumsProvider' => new CArrayDataProvider( $albums[ 'data' ] ) ) );
+		$this->render( 'albumsList', array( 'albumsProvider' => new CArrayDataProvider( $albums[ 'data' ] ) ) );
+	}
+	
+	public function actionAlbum() {
+		$model = new PhotoForm();
+		
+		$this->render( 
+			'photosList',
+			array(
+				'model' => $model
+			)
+		);
 	}
 }
 

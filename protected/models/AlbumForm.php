@@ -1,6 +1,6 @@
 <?php
 class AlbumForm extends CFormModel{	
-        public $name;
-        public $description;
+	public $name;
+	public $description;
 }
 ?>

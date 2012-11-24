@@ -107,7 +107,6 @@ $albums = array(
 		
 			echo CHtml::openTag('div', array(
 				'class' => 'add-button',
-				'style' => 'margin-top: 2%;'
 			));
 				
 				echo CHtml::openTag('div', array(
@@ -123,20 +122,27 @@ $albums = array(
 					
 					echo CHtml::openTag('fieldset');
 						echo CHtml::openTag('legend');
-							echo 'Создать альбом';
+							echo 'Добавить фотографию';
 						echo CHtml::closeTag('legend');
 						echo $form->textFieldRow( $model, 'name', array(
 							'class' => 'input-xlarge',
 							'style' => 'margin-right: 5%;'
 						));
 						echo $form->textFieldRow( $model, 'description', array(
-							'class'=>'input-xlarge',
+							'class' => 'input-xlarge',
 							'style' => 'margin-right: 5%;'
+						));
+						echo $form->fileField( $model, 'description', array(
+							'class' => 'input-xlarge',
+							'style' => 'margin-top: 2%;'
 						));
 						$this->widget('bootstrap.widgets.TbButton', array(
 							'type' => 'primary', 
-							'buttonType'=>'submit', 
-							'label'=>'Создать'
+							'buttonType' => 'submit', 
+							'label' => 'Добавить',
+							'htmlOptions' => array(
+								'class' => 'pull-right'
+							)
 						));
 					echo CHtml::closeTag('fieldset');
 					
@@ -164,7 +170,7 @@ $albums = array(
 				$this->widget('bootstrap.widgets.TbThumbnails', array(
 					'dataProvider'=>$thumbDataProvider,
 					'template'=>"{items}\n{pager}",
-					'itemView'=>'_thumb',
+					'itemView'=>'_thumbPhoto',
 				));
 			echo CHtml::closeTag('div');
 			
