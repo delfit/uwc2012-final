@@ -15,8 +15,18 @@ class SiteController extends Controller
 	}
 	
 	public function actionAlbums() {
+		$form = new AlbumForm();
 		$this->render(
-			'album'
+			'albumsList',
+			array(
+				'model'=>$form
+			)
+		);
+	}
+	
+	public function actionAlbum() {
+		$this->render(
+			'photosList'
 		);
 	}
 
