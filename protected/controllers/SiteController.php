@@ -9,8 +9,43 @@ class SiteController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex() {
+		// TODO убрать вшитый токен
+		Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
+		
+		
+		$FBPhotoStreamPhotos = FBPhotoStream::model()->findAll(array(
+			'limit' => 30,
+		));
+		
+		
+		// запрос на получение фотографии
+		$newPhotoFql = '
+			SELECT owner, src_big, created FROM photo WHERE pid = :pid
+		';
+		
+		// запрос на получение пользователя
+		$newPhotoFql = '
+			SELECT username FROM user WHERE uid = :uid
+		';
+		
+		$newPhotos = array();
+		foreach( $FBPhotoStreamPhotos as $FBPhotoStreamPhoto ) {
+			$currentPhoto = Yii::app()->facebook->query( $albumCoverFql, array( ':pid' => $FBPhotoStreamPhoto->FBPhotoID ) );
+			$currentPhotoOwner = Yii::app()->facebook->query( $newPhotoFql, array( ':uid' => $currentPhoto[ 'data' ][ 'owner' ] ) );
+			
+			$newPhotos[] = array(
+				'username' => $currentPhotoOwner[ 'data' ][ 'username' ],
+				'cover' => $currentPhoto[ 'data' ][ 'src_big' ],
+				'created' => $currentPhoto[ 'data' ][ 'created' ],
+			);
+		}
+		
+		
 		$this->render(
-			'index'
+			'index',
+			array(
+				'photos' => new CArrayDataProvider( $newPhotos )
+			)
 		);
 	}
 	
