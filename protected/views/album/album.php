@@ -28,8 +28,11 @@ $albums = array(
 					$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 						'id' => 'inlineForm',
 						'type' => 'inline',
+						'action' => Yii::app()->createUrl( 'album/upload' ),
+						'method' => 'POST',
 						'htmlOptions' => array(
-							'class'=>'well'
+							'class'=>'well',
+							'enctype' => 'multipart/form-data'
 						),
 					));
 					
@@ -43,6 +46,10 @@ $albums = array(
 							'style' => 'margin-right: 5%;'
 						));
 						echo $form->fileField( $model, 'file', array(
+							'class' => 'input-xlarge',
+							'style' => 'margin-right: 5%;'
+						));
+						echo $form->hiddenField( $model, 'aid', array(
 							'class' => 'input-xlarge',
 							'style' => 'margin-right: 5%;'
 						));
