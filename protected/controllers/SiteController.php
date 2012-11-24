@@ -17,7 +17,6 @@ class SiteController extends Controller
 	
 		
 	public function actionLogin() {		
-		
 		if( isset( $_GET[ 'state' ] ) ) {
 			$identity = new UserIdentity( $_GET[ 'state' ], $_GET[ 'state' ] );
 			Yii::app()->user->login( $identity, 1000 );
@@ -29,7 +28,7 @@ class SiteController extends Controller
 		}
 
 		$params = array(
-			'scope' => 'read_stream',
+			'scope' => 'read_stream, user_photos, publish_stream',
 			'redirect_uri' => 'http://uwc2012-final.delfit.loc/site/login',
 			'display' => 'popup'
 		);

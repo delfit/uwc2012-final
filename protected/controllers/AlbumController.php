@@ -1,14 +1,4 @@
 <?php
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of AlbumController
- *
- * @author ivan
- */
 class AlbumController extends Controller
 {
 	/**
@@ -94,8 +84,6 @@ class AlbumController extends Controller
 	}
 	
 	public function actionView( $aid ) {
-		//Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
-		
 		// альбом
 		$albumFql = '
 			SELECT aid, cover_pid, name, photo_count FROM album WHERE aid = :aid
