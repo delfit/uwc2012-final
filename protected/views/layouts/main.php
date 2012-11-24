@@ -24,19 +24,12 @@
 				
 				// создать меню управления
 				if( Yii::app()->user->isGuest ) {
-					$configMenuItem = array(
-						'icon' => 'cog',
-						'items' => array(
-							array( 'label' => Yii::t( 'application', 'Login' ), 'url' => Yii::app()->createUrl( '/site/login' ), 'icon' => 'user' ),
-						)
+					$configMenuItem = array( 'label' => Yii::t( 'application', 'Login' ), 'url' => Yii::app()->createUrl( '/site/login' ), 'icon' => 'user' 
 					);
 				}
 				else {
-					$configMenuItem = array(
-						'icon' => 'cog',
-						'items' => array(				
-							array( 'label' => Yii::t( 'application', 'Logout' ), 'url' => Yii::app()->createUrl( 'site/logout' ), 'icon' => 'off' ),
-						)
+					$configMenuItem =				
+							array( 'label' => Yii::t( 'application', 'Logout' ), 'url' => Yii::app()->createUrl( 'site/logout' ), 'icon' => 'off'
 					);
 				}
 				
