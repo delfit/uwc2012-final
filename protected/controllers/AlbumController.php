@@ -1,6 +1,7 @@
 <?php
 class AlbumController extends Controller
-{
+{	
+	
 	/**
 	 * @return array action filters
 	 */
@@ -9,6 +10,7 @@ class AlbumController extends Controller
 			'accessControl',
 		);
 	}
+	
 
 	/**
 	 * Определяет правила доступа
@@ -27,38 +29,35 @@ class AlbumController extends Controller
 			),
 		);
 	}
-
 	
-	public function actionCreateAlbum() {
-//		//$formModel = new AlbumForm;
-//
-//		if( isset( $_POST[ 'AlbumForm' ] ) ) {
-//			$formModel->attributes = $_POST[ 'AlbumForm' ];
-//			
-//			if( $formModel->save() ) {
-			//Create an album
-			$album_details = array(
-				'message'=> 'Album desc',
-				'name'=> 'Album name'
-			);
-			$createdAlbum = Yii::app()->facebook->fb->api( '/me/albums', 'post', $formModel->attributes );
+	
+	public function actionList() {
+		// TODO убрать вшитый токен
+		Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
 		
 		
-			if(1) {
-				Yii::app()->user->setFlash( 'success', 'Альбом создан' );
+		$albumForm = new AlbumForm;
+		
+		if( isset( $_POST[ 'AlbumForm' ] ) ) {
+			$albumForm->attributes = $_POST[ 'AlbumForm' ];
+			if( $albumForm->validate() ) {
+				// создать альбом на FB
+				$createdAlbum = Yii::app()->facebook->fb->api( '/me/albums', 'post', $albumForm->attributes );
+				
+				if( isset( $createdAlbum[ 'id' ] ) ) {
+					Yii::app()->user->setFlash( 'success', 'Альбом создан' );
+				}
+				else {
+					Yii::app()->user->setFlash( 'error', 'Ошибка при создании альбома на Facebook' );
+				}
 			}
 			else {
-				Yii::app()->user->setFlash( 'error', $formModel->getError( 'Name' ) );
+				Yii::app()->user->setFlash( 'error', $createdAlbum->getError( 'name' ) );
 			}
-//		}
+		}
 		
 		
-		$this->redirect( 'album/list' );
-	}
-	
-	
-	public function actionList() {		
-		// альбомы
+		// запрос на получение альбомов
 		$albumsFql = '
 			SELECT aid, cover_pid, name, photo_count FROM album WHERE owner = me()
 		';
@@ -75,11 +74,12 @@ class AlbumController extends Controller
 			$album[ 'cover' ] = isset( $currentCover[ 'data' ][0]['src_big'] ) ? $currentCover[ 'data' ][0]['src_big'] : 'http://placehold.it/300x200';
 		}
 		
+		
 		$this->render( 'list', array( 
 			'albumsProvider' => new CArrayDataProvider( $albums[ 'data' ], array(
 				'id'=>'albums',
 			)),
-			'model' => new AlbumForm()
+			'model' => $albumForm
 		));
 	}
 	
