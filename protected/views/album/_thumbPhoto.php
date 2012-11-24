@@ -25,11 +25,5 @@
 				echo 'Количество лайков: '.$data['like_info']['like_count'];
 			echo CHtml::closeTag('p');
 			
-			
-			$this->widget('bootstrap.widgets.TbButton',array(
-				'label' => 'Like',
-				'type' => 'primary',
-				'size' => 'large'
-			));
 		echo CHtml::closeTag( 'div' );
 ?>
