@@ -1,15 +1,15 @@
 <?php
-$albums = array(
-	array(
-		'pid' => 1,
-		'src_big' => 'http://placehold.it/320x320',
-		'caption' => 'Description4',
-		'like_info' => array(
-			'can_like' => 1,
-            'like_count' => 0
-		)
-	)
-);
+//$albums = array(
+//	array(
+//		'pid' => 1,
+//		'src_big' => 'http://placehold.it/320x320',
+//		'caption' => 'Description4',
+//		'like_info' => array(
+//			'can_like' => 1,
+//            'like_count' => 0
+//		)
+//	)
+//);
 	echo CHtml::openTag('div', array(
 		'class' => 'row-fluid',
 	));
@@ -73,29 +73,31 @@ $albums = array(
 			
 			echo CHtml::tag('hr');
 			
-//			echo CHtml::openTag('div', array(
-//				'class' => 'photo',
-//			));
-//				echo CHtml::openTag('h4', array(
-//					'style' => 'text-align: center; color: blue;'
-//				));
-//					echo 'Album Name (hardcoded)';
-//				echo CHtml::closeTag('h4');
-//				$thumbDataProvider = new CArrayDataProvider($photosProvider, array(
-//					'id'=>'albums',
-//					'pagination'=>array(
-//						'pageSize'=>12,
-//					),
-//				));
-//				
-//				$this->widget('bootstrap.widgets.TbThumbnails', array(
-//					'dataProvider'=>$thumbDataProvider,
-//					'template'=>"{items}\n{pager}",
-//					'itemView'=>'_thumbPhoto',
-//				));
-//			echo CHtml::closeTag('div');
-//			
-//		echo CHtml::closeTag('div');
+			echo CHtml::openTag('div', array(
+				'class' => 'photo',
+			));
+				echo CHtml::openTag('h4', array(
+					'style' => 'text-align: center; color: blue;'
+				));
+
+					echo $album[ 'name'  ];
+				echo CHtml::closeTag('h4');
+				
+				echo CHtml::openTag('p', array(
+					'style' => 'text-align: center;'
+				));
+
+					echo ' (' . $album[ 'photo_count'  ] . ' фото)';
+				echo CHtml::closeTag('p');
+				
+				$this->widget('bootstrap.widgets.TbThumbnails', array(
+					'dataProvider'=> $photosProvider,
+					'template'=>"{items}\n{pager}",
+					'itemView'=>'_thumbPhoto',
+				));
+			echo CHtml::closeTag('div');
+			
+		echo CHtml::closeTag('div');
 		
 	echo CHtml::closeTag('div');
 	
