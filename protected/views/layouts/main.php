@@ -18,6 +18,25 @@
 			<div id="header">
 				<?php
 				
+				
+				// создать меню управления
+				if( Yii::app()->user->isGuest ) {
+					$configMenuItem = array(
+						'icon' => 'cog',
+						'items' => array(
+							array( 'label' => Yii::t( 'application', 'Login' ), 'url' => Yii::app()->createUrl( '/site/login' ), 'icon' => 'user' ),
+						)
+					);
+				}
+				else {
+					$configMenuItem = array(
+						'icon' => 'cog',
+						'items' => array(				
+							array( 'label' => Yii::t( 'application', 'Logout' ), 'url' => Yii::app()->createUrl( 'site/logout' ), 'icon' => 'off' ),
+						)
+					);
+				}
+				
 				// отрисовать главное меню
 				$this->widget( 'bootstrap.widgets.TbNavbar', array(
 					'brand' => CHtml::encode( Yii::app()->name ), 
@@ -28,6 +47,16 @@
 						array(
 							'class' => 'bootstrap.widgets.TbMenu',
 							'items' => $this->mainMenu,
+						),
+						
+						array(
+							'class' => 'bootstrap.widgets.TbMenu',
+							'htmlOptions' => array(
+								'class' => 'pull-right'
+							),
+							'items' => array( 
+								$configMenuItem 
+							),
 						),
 					)
 				) );
