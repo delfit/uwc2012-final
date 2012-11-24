@@ -1,0 +1,6 @@
+
+DROP TABLE IF EXISTS `FBPhotoStream`;
+CREATE TABLE `FBPhotoStream` (
+  `FBPhotoID` varchar(100) NOT NULL,
+  PRIMARY KEY (`FBPhotoID`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

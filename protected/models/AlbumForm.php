@@ -6,7 +6,8 @@ class AlbumForm extends CFormModel{
 		public function rules() {
 			return array(
 				array( 'name', 'required' ),
-				array( 'rememberMe, message', 'safe' ),
+				array( 'aid', 'safe' ),
+				array( 'rememberMe, message, aid', 'safe' ),
 			);
 		}
 }

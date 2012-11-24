@@ -25,6 +25,16 @@
 					echo CHtml::closeTag('b');
 						echo $data['author'];
 				echo CHtml::closeTag('li');
+				
+				echo CHtml::openTag('li');
+					echo CHtml::openTag('b', array(
+						'style' => 'color: blue;'
+					));
+						echo 'Создан: ';
+					echo CHtml::closeTag('b');
+						echo date( 'd.m.Y G:i:s', $data['createdTimestamp'] );
+				echo CHtml::closeTag('li');
+				
 				echo CHtml::openTag('li');
 					echo CHtml::openTag('a',  array(
 						'href' => '#',
@@ -35,7 +45,7 @@
 						));
 							echo 'Альбом: ';
 						echo CHtml::closeTag('b');
-							echo $data['album'];
+							echo '???';
 					echo CHtml::closeTag( 'a' );
 				echo CHtml::closeTag('li');
 			echo CHtml::closeTag('ul');

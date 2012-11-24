@@ -20,7 +20,7 @@ class AlbumController extends Controller
 	public function accessRules() {
 		return array(
 			array( 'allow',
-				'actions' => array( 'list', 'view', 'delete' ),
+				'actions' => array( 'list', 'view', 'upload' ),
 				'users' => array( '@' ),
 			),
 			array( 'deny', // deny all users
@@ -79,9 +79,15 @@ class AlbumController extends Controller
 	}
 	
 	public function actionView( $aid ) {
-		//Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
-		
-		$aid = '100002102102474_90696';
+		// загружаем фото
+		if( isset( $_POST[ 'PhotoForm' ] ) ) {
+			if( isset( $_FILES[ 'PhotoForm' ][ 'tmp_name' ] ) ) {
+				$upload_photo = Yii::app()->facebook->fb->api('/'. $_POST[ 'PhotoForm' ][ 'aid' ] .'/photos', 'post', array(
+					'caption'=> $_POST[ 'PhotoForm' ][ 'caption' ],
+					'image' => '@' . realpath( $_FILES[ 'PhotoForm' ][ 'tmp_name' ][ 'file' ] )
+				) );
+			}
+		}
 		
 		// альбом
 		$albumFql = '
@@ -104,15 +110,16 @@ class AlbumController extends Controller
 		$photos = Yii::app()->facebook->query( $photosFql, array( ':aid' => $aid ) );
 
 		$photoForm = new PhotoForm();
-		
+		$photoForm->aid = $aid;
 		$this->render( 
 			'album', 
 			array(
-				'model' => $photoForm,
-				'album' => $album[ 'data' ],
-				'photosProvider' => new CArrayDataProvider( $photos[ 'data' ], array(
-					'id'=>'photos',
-				) )
+					'model' => $photoForm,
+					'album' => $album[ 'data' ],
+					'photosProvider' => new CArrayDataProvider( $photos[ 'data' ], array(
+						'id'=>'photos',
+					) 
+				)
 			)
 		);
 	}
@@ -125,7 +132,9 @@ class AlbumController extends Controller
 		return isset( $data[ 'data' ][0][ $field ] ) ? $data[ 'data' ][0][ $field ] : null;
 	}
 	
-//	public function upload() {
+	public function actionUpload() {
+		
+
 //		$_FI
 //		
 //		$attributes = array(
@@ -143,7 +152,7 @@ class AlbumController extends Controller
 //		$attributes[ 'image' ] = '@' . 
 //
 //		$upload_photo = $facebook->api('/'..'/photos', 'post', $photo_details);
-//	}
+	}
 }
 
 ?>
