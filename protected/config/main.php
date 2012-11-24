@@ -27,7 +27,7 @@ return array(
 	'modules' => array(
 //		'gii' => array(
 //			'class' => 'system.gii.GiiModule',
-//			'password' => 'uwc2012',
+//			'password' => 'uwc2012-final',
 //			 // If removed, Gii defaults to localhost only. Edit carefully to taste.
 //			'ipFilters' => array('127.0.0.1', '::1'),
 //			
@@ -49,7 +49,7 @@ return array(
 		),
 		
 		'db' => array(
-			'connectionString' => 'mysql:host=localhost;dbname=uwc2012',
+			'connectionString' => 'mysql:host=localhost;dbname=uwc2012-final',
 			'emulatePrepare' => true,
 			'username' => 'uwc2012-final',
 			'password' => 'uwc2012-final',
