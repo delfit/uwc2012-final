@@ -22,7 +22,6 @@
 			echo CHtml::openTag('p', array(
 				'style' => 'text-align: center; color: gray; font-size: 0.8em; margin: 0; font-style: italic; padding: 0'
 			));
-			$photos;
 			echo $data['photo_count'].' фотография(-и)';
 			echo CHtml::closeTag('p');
 		echo CHtml::closeTag( 'div' );
