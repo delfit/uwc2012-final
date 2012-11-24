@@ -27,17 +27,19 @@ class SiteController extends Controller
 		$newPhotos = array();
 		foreach( $FBPhotoStreamPhotos as $FBPhotoStreamPhoto ) {
 			$currentPhotoResult = Yii::app()->facebook->query( $newPhotoFql, array( ':pid' => $FBPhotoStreamPhoto->FBPhotoID ) );
-			$currentPhotoData = $currentPhotoResult[ 'data' ][ 0 ];
-			//print_r($currentPhoto);die;
-			$currentPhotoOwnerResult = Yii::app()->facebook->query( $photoOwnerFql, array( ':uid' => $currentPhotoData[ 'owner' ] ) );
-			$currentPhotoOwnerData = $currentPhotoOwnerResult[ 'data' ][ 0 ];
-			
-			$newPhotos[] = array(
-				'id' => $FBPhotoStreamPhoto->FBPhotoID,
-				'author' => $currentPhotoOwnerData[ 'username' ],
-				'photo' => $currentPhotoData[ 'src_big' ],
-				'createdTimestamp' => $currentPhotoData[ 'created' ],
-			);
+			if( isset( $currentPhotoResult[ 'data' ][ 0 ] ) ) {
+				$currentPhotoData = $currentPhotoResult[ 'data' ][ 0 ];
+				//print_r($currentPhoto);die;
+				$currentPhotoOwnerResult = Yii::app()->facebook->query( $photoOwnerFql, array( ':uid' => $currentPhotoData[ 'owner' ] ) );
+				$currentPhotoOwnerData = $currentPhotoOwnerResult[ 'data' ][ 0 ];
+
+				$newPhotos[] = array(
+					'id' => $FBPhotoStreamPhoto->FBPhotoID,
+					'author' => $currentPhotoOwnerData[ 'username' ],
+					'photo' => $currentPhotoData[ 'src_big' ],
+					'createdTimestamp' => $currentPhotoData[ 'created' ],
+				);
+			}
 		}
 		
 		
