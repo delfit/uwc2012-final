@@ -11,6 +11,34 @@
  */
 class AlbumController extends Controller
 {
+	public function actionCreateAlbum() {
+//		//$formModel = new AlbumForm;
+//
+//		if( isset( $_POST[ 'AlbumForm' ] ) ) {
+//			$formModel->attributes = $_POST[ 'AlbumForm' ];
+//			
+//			if( $formModel->save() ) {
+			//Create an album
+			$album_details = array(
+				'message'=> 'Album desc',
+				'name'=> 'Album name'
+			);
+			$createdAlbum = Yii::app()->facebook->fb->api( '/me/albums', 'post', $formModel->attributes );
+		
+		
+			if(1) {
+				Yii::app()->user->setFlash( 'success', 'Альбом создан' );
+			}
+			else {
+				Yii::app()->user->setFlash( 'error', $formModel->getError( 'Name' ) );
+			}
+//		}
+		
+		
+		$this->redirect( 'album/list' );
+	}
+	
+	
 	public function actionList() {
 		Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
 		
@@ -27,23 +55,78 @@ class AlbumController extends Controller
 		foreach( $albums[ 'data' ] as &$album ) {
 			$currentCover = Yii::app()->facebook->query( $albumCoverFql, array( ':pid' => $album[ 'cover_pid' ] ) );
 			
-			$album[ 'cover' ] = isset( $currentCover[ 'data' ][0]['src_big'] ) ? $currentCover[ 'data' ][0]['src_big'] : null;
+			$album[ 'id' ] = $album[ 'aid' ];
+			$album[ 'cover' ] = isset( $currentCover[ 'data' ][0]['src_big'] ) ? $currentCover[ 'data' ][0]['src_big'] : 'http://placehold.it/300x200';
 		}
 
 		
-		$this->render( 'albumsList', array( 'albumsProvider' => new CArrayDataProvider( $albums[ 'data' ] ) ) );
+		$this->render( 'list', array( 
+			'albumsProvider' => new CArrayDataProvider( $albums[ 'data' ], array(
+				'id'=>'albums',
+			)),
+			'model' => new AlbumForm()
+		));
 	}
 	
-	public function actionAlbum() {
-		$model = new PhotoForm();
+	public function actionView( $aid ) {
+		Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
+		
+		// альбом
+		$albumFql = '
+			SELECT aid, cover_pid, name, photo_count FROM album WHERE aid = :aid
+		';
+		$album = Yii::app()->facebook->query( $albumFql, array( ':aid' => $aid ) );
+		//$album = $this->parseData( $album );
+		
+		// обложки к альбому
+		$albumCoverFql = '
+			SELECT src_big FROM photo WHERE pid = :pid
+		';
+		$cover = Yii::app()->facebook->query( $albumCoverFql, array( ':pid' => $this->getDataFiled( $album, 'cover_pid' ) ) );
+		$album[ 'cover' ] = $this->getDataFiled( $cover, 'src_big' );
+		
+		// фотографии из альбома
+		$photosFql = '
+			SELECT pid, src_big, src, link, caption, like_info FROM photo WHERE aid= :aid
+		';
+		$photos = Yii::app()->facebook->query( $photosFql, array( ':aid' => $aid ) );
 		
 		$this->render( 
-			'photosList',
+			'album', 
 			array(
-				'model' => $model
+				'album' => $album[ 'data' ],
+				'photos' => new CArrayDataProvider( $photos[ 'data' ] )
 			)
 		);
 	}
+	
+	public function parseData( $data ) {
+		return isset( $data[ 'data' ][0] ) ? $data[ 'data' ][0] : null;
+	}
+	
+	public function getDataFiled( $data, $field ) {
+		return isset( $data[ 'data' ][0][ $field ] ) ? $data[ 'data' ][0][ $field ] : null;
+	}
+	
+//	public function upload() {
+//		$_FI
+//		
+//		$attributes = array(
+//			'message'=> 'Photo message',
+//			'image' => null
+//		);
+//		
+//		$albumID = null;
+//		
+//		//Upload a photo to album of ID...
+//		$photo_details = array(
+//			'message'=> 'Photo message'
+//		);
+//
+//		$attributes[ 'image' ] = '@' . 
+//
+//		$upload_photo = $facebook->api('/'..'/photos', 'post', $photo_details);
+//	}
 }
 
 ?>

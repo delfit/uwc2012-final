@@ -16,8 +16,11 @@ class SiteController extends Controller
 	
 	
 		
-	public function actionLogin() {
+	public function actionLogin() {		
 		if( isset( $_GET[ 'state' ] ) ) {
+			$identity = new UserIdentity( $_GET[ 'state' ], $_GET[ 'state' ] );
+			Yii::app()->user->login( $identity, 1000 );
+			
 			Yii::app()->session[ 'state' ] = $_GET[ 'state' ];
 			$this->redirect( $this->createUrl( 'site/index' ) );
 		}
@@ -28,19 +31,21 @@ class SiteController extends Controller
 			'display' => 'popup'
 		);
 		
-		$loginUrl = Yii::app()->facebook->fb->getLoginUrl($params);
+		$loginUrl = Yii::app()->facebook->fb->getLoginUrl( $params );
 		$this->redirect( $loginUrl );
 	}
 	
 	
-	public function actionLogout() {		
+	public function actionLogout() {					
 			$params = array(
-				'redirect_uri' => 'http://uwc2012-final.delfit.loc/site/login',
+				'redirect_uri' => 'http://uwc2012-final.delfit.loc/site/index',
 				'display' => 'popup'
 			);
-
-			$logoutUrl = Yii::app()->facebook->fb->getLogout($params);
-		
+			
+			$logoutUrl = Yii::app()->facebook->fb->getLogoutUrl( $params );
+			
+			Yii::app()->user->logout();
+			
 			$this->redirect( $logoutUrl );
 	}
 
