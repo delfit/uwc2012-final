@@ -12,6 +12,35 @@
 class AlbumController extends Controller
 {	
 	
+	/**
+	 * @return array action filters
+	 */
+	public function filters() {
+		return array(
+			'accessControl',
+		);
+	}
+	
+
+	/**
+	 * Определяет правила доступа
+	 * Используется в 'accessControl' фильтре.
+	 * 
+	 * @return array правила доступа
+	 */
+	public function accessRules() {
+		return array(
+			array( 'allow',
+				'actions' => array( 'list', 'view', 'delete' ),
+				'users' => array( '@' ),
+			),
+			array( 'deny', // deny all users
+				'users' => array( '*' ),
+			),
+		);
+	}
+	
+	
 	public function actionList() {
 		// TODO убрать вшитый токен
 		Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
