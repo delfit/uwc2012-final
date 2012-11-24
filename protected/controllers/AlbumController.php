@@ -79,8 +79,6 @@ class AlbumController extends Controller
 	}
 	
 	public function actionView( $aid ) {
-		
-		$aid = '100002102102474_90696';
 		// загружаем фото
 		if( isset( $_POST[ 'PhotoForm' ] ) ) {
 			if( isset( $_FILES[ 'PhotoForm' ][ 'tmp_name' ] ) ) {
@@ -88,6 +86,12 @@ class AlbumController extends Controller
 					'caption'=> $_POST[ 'PhotoForm' ][ 'caption' ],
 					'image' => '@' . realpath( $_FILES[ 'PhotoForm' ][ 'tmp_name' ][ 'file' ] )
 				) );
+	
+				if( isset( $upload_photo[ 'id' ] ) ) {
+					$newPhoto = new FBPhotoStream();
+					$newPhoto->FBPhotoID = $upload_photo[ 'id' ];
+					$newPhoto->save();
+				}
 			}
 		}
 		

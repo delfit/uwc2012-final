@@ -28,7 +28,7 @@
 					$form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 						'id' => 'inlineForm',
 						'type' => 'inline',
-						'action' => Yii::app()->createUrl( 'album/upload' ),
+						'action' => Yii::app()->createUrl( 'album/view', array( 'aid' => $model->aid ) ),
 						'method' => 'POST',
 						'htmlOptions' => array(
 							'class'=>'well',
