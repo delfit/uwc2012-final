@@ -8,7 +8,10 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 		
+		<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/slimbox2.css" media="screen" />
+		
 		<?php Yii::app()->clientScript->registerScriptFile( Yii::app()->request->baseUrl . '/js/app.js', CClientScript::POS_END ) ?>
+		<?php Yii::app()->clientScript->registerScriptFile( Yii::app()->request->baseUrl . '/js/slimbox2.js', CClientScript::POS_END ) ?>
 
 		<title><?php echo CHtml::encode( $this->pageTitle ); ?></title>
 	</head>
