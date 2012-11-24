@@ -31,11 +31,7 @@ class AlbumController extends Controller
 	}
 	
 	
-	public function actionList() {
-		// TODO убрать вшитый токен
-		Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
-		
-		
+	public function actionList() {		
 		$albumForm = new AlbumForm;
 		
 		if( isset( $_POST[ 'AlbumForm' ] ) ) {
