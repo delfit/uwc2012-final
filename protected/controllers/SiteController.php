@@ -9,10 +9,6 @@ class SiteController extends Controller
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex() {
-		// TODO убрать вшитый токен
-		Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
-		
-		
 		$FBPhotoStreamPhotos = FBPhotoStream::model()->findAll(array(
 			'limit' => 30,
 		));
@@ -24,19 +20,23 @@ class SiteController extends Controller
 		';
 		
 		// запрос на получение пользователя
-		$newPhotoFql = '
+		$photoOwnerFql = '
 			SELECT username FROM user WHERE uid = :uid
 		';
 		
 		$newPhotos = array();
 		foreach( $FBPhotoStreamPhotos as $FBPhotoStreamPhoto ) {
-			$currentPhoto = Yii::app()->facebook->query( $albumCoverFql, array( ':pid' => $FBPhotoStreamPhoto->FBPhotoID ) );
-			$currentPhotoOwner = Yii::app()->facebook->query( $newPhotoFql, array( ':uid' => $currentPhoto[ 'data' ][ 'owner' ] ) );
+			$currentPhotoResult = Yii::app()->facebook->query( $newPhotoFql, array( ':pid' => $FBPhotoStreamPhoto->FBPhotoID ) );
+			$currentPhotoData = $currentPhotoResult[ 'data' ][ 0 ];
+			//print_r($currentPhoto);die;
+			$currentPhotoOwnerResult = Yii::app()->facebook->query( $photoOwnerFql, array( ':uid' => $currentPhotoData[ 'owner' ] ) );
+			$currentPhotoOwnerData = $currentPhotoOwnerResult[ 'data' ][ 0 ];
 			
 			$newPhotos[] = array(
-				'username' => $currentPhotoOwner[ 'data' ][ 'username' ],
-				'cover' => $currentPhoto[ 'data' ][ 'src_big' ],
-				'created' => $currentPhoto[ 'data' ][ 'created' ],
+				'id' => $FBPhotoStreamPhoto->FBPhotoID,
+				'author' => $currentPhotoOwnerData[ 'username' ],
+				'photo' => $currentPhotoData[ 'src_big' ],
+				'createdTimestamp' => $currentPhotoData[ 'created' ],
 			);
 		}
 		
@@ -44,7 +44,9 @@ class SiteController extends Controller
 		$this->render(
 			'index',
 			array(
-				'photos' => new CArrayDataProvider( $newPhotos )
+				'newPhotosProvider' => new CArrayDataProvider( $newPhotos, array(
+					'id' => 'newPhotos', 
+				))
 			)
 		);
 	}
