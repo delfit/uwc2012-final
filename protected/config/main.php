@@ -60,6 +60,10 @@ return array(
 			// use 'site/error' action to display errors
 			'errorAction' => 'site/error',
 		),
+		
+		'facebook' => array(
+			'class' => 'application.components.FacebookOne',
+		),
 				
 		'log' => array(
 			'class' => 'CLogRouter',

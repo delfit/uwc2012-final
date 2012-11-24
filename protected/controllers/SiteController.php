@@ -14,20 +14,34 @@ class SiteController extends Controller
 		);
 	}
 	
-	public function actionAlbums() {
-		$form = new AlbumForm();
-		$this->render(
-			'albumsList',
-			array(
-				'model'=>$form
-			)
+	
+		
+	public function actionLogin() {
+		if( isset( $_GET[ 'state' ] ) ) {
+			Yii::app()->session[ 'state' ] = $_GET[ 'state' ];
+			$this->redirect( $this->createUrl( 'site/index' ) );
+		}
+		
+		$params = array(
+			'scope' => 'read_stream',
+			'redirect_uri' => 'http://uwc2012-final.delfit.loc/site/login',
+			'display' => 'popup'
 		);
+		
+		$loginUrl = Yii::app()->facebook->fb->getLoginUrl($params);
+		$this->redirect( $loginUrl );
 	}
 	
-	public function actionAlbum() {
-		$this->render(
-			'photosList'
-		);
+	
+	public function actionLogout() {		
+			$params = array(
+				'redirect_uri' => 'http://uwc2012-final.delfit.loc/site/login',
+				'display' => 'popup'
+			);
+
+			$logoutUrl = Yii::app()->facebook->fb->getLogout($params);
+		
+			$this->redirect( $logoutUrl );
 	}
 
 
