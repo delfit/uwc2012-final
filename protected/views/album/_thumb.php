@@ -5,7 +5,7 @@
 			'style' => 'margin: 2% 5%; height: 200px;'
 		) );
 			echo CHtml::openTag('a',  array(
-				'href' => '#',
+				'href' => Yii::app()->createUrl('/album/view/aid/'.$data['aid']),
 				'target' => '_self'
 			));
 				echo CHtml::image($data['cover'], 'photo', array(
@@ -13,7 +13,7 @@
 				));
 			echo CHtml::closeTag( 'a' );
 			echo CHtml::openTag('a', array(
-				'href' => '#',
+				'href' => Yii::app()->createUrl('/album/view/aid/'.$data['aid']),
 				'target' => '_self',
 				'style' => 'text-align: center; color: blue; margin: 0; font-weight: bold; display: block;'
 			));
