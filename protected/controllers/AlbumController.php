@@ -1,7 +1,6 @@
 <?php
 class AlbumController extends Controller
 {	
-	
 	/**
 	 * @return array action filters
 	 */
