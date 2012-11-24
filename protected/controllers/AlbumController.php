@@ -11,6 +11,34 @@
  */
 class AlbumController extends Controller
 {
+	/**
+	 * @return array action filters
+	 */
+	public function filters() {
+		return array(
+			'accessControl',
+		);
+	}
+
+	/**
+	 * Определяет правила доступа
+	 * Используется в 'accessControl' фильтре.
+	 * 
+	 * @return array правила доступа
+	 */
+	public function accessRules() {
+		return array(
+			array( 'allow',
+				'actions' => array( 'list', 'view', 'delete' ),
+				'users' => array( '@' ),
+			),
+			array( 'deny', // deny all users
+				'users' => array( '*' ),
+			),
+		);
+	}
+
+	
 	public function actionCreateAlbum() {
 //		//$formModel = new AlbumForm;
 //
@@ -39,9 +67,7 @@ class AlbumController extends Controller
 	}
 	
 	
-	public function actionList() {
-		Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
-		
+	public function actionList() {		
 		// альбомы
 		$albumsFql = '
 			SELECT aid, cover_pid, name, photo_count FROM album WHERE owner = me()
@@ -58,7 +84,6 @@ class AlbumController extends Controller
 			$album[ 'id' ] = $album[ 'aid' ];
 			$album[ 'cover' ] = isset( $currentCover[ 'data' ][0]['src_big'] ) ? $currentCover[ 'data' ][0]['src_big'] : 'http://placehold.it/300x200';
 		}
-
 		
 		$this->render( 'list', array( 
 			'albumsProvider' => new CArrayDataProvider( $albums[ 'data' ], array(
@@ -69,7 +94,7 @@ class AlbumController extends Controller
 	}
 	
 	public function actionView( $aid ) {
-		Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
+		//Yii::app()->facebook->fb->setAccessToken( 'AAACEdEose0cBALWR5tGMzoxdz1kzzP1gPtElueKJeYrxNbpqZCKZBXcTZBGtlquxZBM6IUfU7GViV0OI6C2JZAuQv3md71yfsnUKbvw0T3NPq6E9jKJgp' );
 		
 		// альбом
 		$albumFql = '
